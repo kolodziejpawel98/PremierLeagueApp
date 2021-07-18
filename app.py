@@ -4,11 +4,7 @@ import csv
 
 cls, wnd = uic.loadUiType('app.ui')
 
-
-# file = open('sezon20202021.csv', 'r')
-# reader = csv.reader(file)
-
-table = { #zmienić to na klase table z polami team i points!!!!!!!!!!!!!!!!!!
+table = {
     "Arsenal" : 0,
     "Aston Villa" : 0,
     "Brighton" : 0,
@@ -31,11 +27,6 @@ table = { #zmienić to na klase table z polami team i points!!!!!!!!!!!!!!!!!!
     "Wolves" : 0
 }
 
-print("po table")
-
-# for y in table:
-#     print(y,':',table[y])
-
 class Match:
     def __init__(self, match_num, round_num, date, location, h_team, a_team, h_goals, a_goals):
         self.match_num = match_num
@@ -57,9 +48,7 @@ class Match:
         print("Result: " + self.h_goals + " - " + self.a_goals)
 
 
-# list_of_matches = []
-
-def calc_points_for_game(list_of_matches, table):
+def calc_points(list_of_matches, table):
     for team in table:
         table[team] = 0
     for game in list_of_matches[1:]:
@@ -71,6 +60,20 @@ def calc_points_for_game(list_of_matches, table):
         elif game.h_goals < game.a_goals:
             table[game.a_team] += 3
 
+def calc_goals_scored(list_of_matches, table):
+    for team in table:
+        table[team] = 0
+    for game in list_of_matches[1:]:
+        table[game.h_team] += int(game.h_goals)
+        table[game.a_team] += int(game.a_goals)
+
+def calc_goals_conceded(list_of_matches, table):
+    for team in table:
+        table[team] = 0
+    for game in list_of_matches[1:]:
+        table[game.h_team] += int(game.a_goals)
+        table[game.a_team] += int(game.h_goals)
+
 def find_game(list_of_matches, team, round):
     for match in list_of_matches:
         if match.h_team == team:
@@ -80,23 +83,26 @@ def find_game(list_of_matches, team, round):
             if match.round_num == str(round):
                 return match.h_team + " " + match.h_goals + " - " + match.a_goals + " " + match.a_team
 
+def sort_and_print(table):
+    final_table = ""
+
+    table_end_of_season = dict( sorted(table.items(),
+                       key=lambda item: item[1],
+                       reverse=True))
+
+    for key in table_end_of_season:
+            final_table += key
+            final_table += " : "
+            final_table += str(table_end_of_season[key])
+            final_table += '\n'
+
+    return str(final_table)
 
 
-# for row in reader:
-#     list_of_matches.append(Match(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
-
-# for match in list_of_matches:
-#     if match.round_num == '1':
-#         match.print_values()
-#         print("\n")
-
-# calc_points_for_game(list_of_matches, table)
-
-
-#------------------------------------------------------------------------
 class Nasza(wnd, cls):
 
     list_of_matches = []
+    final_table = ""
 
     def __init__(self):
         super().__init__()
@@ -107,15 +113,20 @@ class Nasza(wnd, cls):
         self.label_fileName.setText(f_name[0])
         file = open(f_name[0], 'r')
         reader = csv.reader(file)
+        final_table = ""
 
         for row in reader:
             self.list_of_matches.append(Match(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]))
 
-        calc_points_for_game(self.list_of_matches, table)
-        self.textBrowser_table.setText(str(table))
+        calc_points(self.list_of_matches, table)
+        self.textBrowser_table.setText(sort_and_print(table))
         self.spinBox_RoundNumber.setMaximum(38)
         for team in table:
             self.comboBox_roundTeam.addItem(team)
+        self.comboBox_goalsScoredConceded.addItem("---")
+        self.comboBox_goalsScoredConceded.addItem("Gole strzelone")
+        self.comboBox_goalsScoredConceded.addItem("Gole stracone")
+        self.textBrowser_goalsScoredConceded.setText("")
 
     def on_comboBox_roundTeam_activated(self):
         self.spinBox_RoundNumber.setValue(0)
@@ -123,9 +134,15 @@ class Nasza(wnd, cls):
     def on_spinBox_RoundNumber_valueChanged(self):
         self.lineEdit_roundResult.setText(find_game(self.list_of_matches, self.comboBox_roundTeam.currentText(), self.spinBox_RoundNumber.value()))
 
-
-
-
+    def on_comboBox_goalsScoredConceded_activated(self):
+        if self.comboBox_goalsScoredConceded.currentText() == "Gole strzelone":
+            calc_goals_scored(self.list_of_matches, table)
+            self.textBrowser_goalsScoredConceded.setText(sort_and_print(table))
+        elif self.comboBox_goalsScoredConceded.currentText() == "Gole stracone":
+            calc_goals_conceded(self.list_of_matches, table)
+            self.textBrowser_goalsScoredConceded.setText(sort_and_print(table))
+        else:
+            self.textBrowser_goalsScoredConceded.setText("")
 
 a = QApplication([])
 o = Nasza()

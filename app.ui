@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>870</width>
-    <height>661</height>
+    <width>681</width>
+    <height>620</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,9 +16,9 @@
   <widget class="QPushButton" name="pushButton_openFile">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>180</x>
      <y>30</y>
-     <width>121</width>
+     <width>151</width>
      <height>31</height>
     </rect>
    </property>
@@ -26,99 +26,10 @@
     <string>Otwórz plik</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_chooseCSV">
-   <property name="geometry">
-    <rect>
-     <x>340</x>
-     <y>40</y>
-     <width>161</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Wybierz plik .csv</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_table">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>30</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Tabela</string>
-   </property>
-  </widget>
-  <widget class="QTextBrowser" name="textBrowser_table">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>70</y>
-     <width>261</width>
-     <height>581</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_roundTeam">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>140</y>
-     <width>121</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QSpinBox" name="spinBox_RoundNumber">
-   <property name="geometry">
-    <rect>
-     <x>430</x>
-     <y>140</y>
-     <width>48</width>
-     <height>26</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_roundResult">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>190</y>
-     <width>331</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_goalsScoredConceded">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>270</y>
-     <width>171</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QTextBrowser" name="textBrowser_goalsScoredConceded">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>300</y>
-     <width>256</width>
-     <height>251</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_fileName">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>180</x>
      <y>70</y>
      <width>481</width>
      <height>17</height>
@@ -128,44 +39,140 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="label_round">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>120</y>
-     <width>141</width>
-     <height>17</height>
+     <x>20</x>
+     <y>30</y>
+     <width>114</width>
+     <height>61</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Numer kolejki</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label_chooseCSV">
+      <property name="text">
+       <string>Wybierz plik .csv</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Ścieżka do pliku:</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QLabel" name="label_team">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>120</y>
-     <width>67</width>
-     <height>17</height>
+     <x>20</x>
+     <y>110</y>
+     <width>258</width>
+     <height>481</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Drużyna</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QLabel" name="label_table">
+      <property name="text">
+       <string>Tabela końcowa</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="textBrowser_table"/>
+    </item>
+   </layout>
   </widget>
-  <widget class="QLabel" name="label_result">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>170</y>
-     <width>67</width>
-     <height>17</height>
+     <x>300</x>
+     <y>270</y>
+     <width>258</width>
+     <height>321</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Wynik</string>
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <widget class="QComboBox" name="comboBox_goalsScoredConceded"/>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="textBrowser_goalsScoredConceded"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>120</y>
+     <width>121</width>
+     <height>50</height>
+    </rect>
    </property>
+   <layout class="QVBoxLayout" name="verticalLayout_4">
+    <item>
+     <widget class="QLabel" name="label_team">
+      <property name="text">
+       <string>Drużyna</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="comboBox_roundTeam"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>120</y>
+     <width>97</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_5">
+    <item>
+     <widget class="QLabel" name="label_round">
+      <property name="text">
+       <string>Numer kolejki</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSpinBox" name="spinBox_RoundNumber"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>180</y>
+     <width>331</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_6">
+    <item>
+     <widget class="QLabel" name="label_result">
+      <property name="text">
+       <string>Wynik</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEdit_roundResult"/>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
